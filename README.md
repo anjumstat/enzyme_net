@@ -1,268 +1,270 @@
-# 🧬 Enzyme-Net: A Novel Transformer–MLP Hybrid Framework for Fish Enzyme Classification
+# Enzyme-Net: A Species-Aware Feature-Level Attention Transformer-MLP Framework for Enzyme Classification from Protein Embeddings
 
-## 📌 Overview
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
+![Deep Learning](https://img.shields.io/badge/Deep%20Learning-PyTorch-red)
+![Bioinformatics](https://img.shields.io/badge/Application-Computational%20Proteomics-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-**Enzyme-Net** is a complete deep learning and bioinformatics pipeline designed for **enzyme function prediction in fish species** using **1024-dimensional UniProt protein embeddings**.
+## Overview
 
-The framework introduces a **novel Transformer–MLP hybrid architecture** with advanced feature learning mechanisms and is evaluated using **species-aware splitting, cross-validation, ablation studies, and statistical significance testing**.
+This repository contains the implementation of **Enzyme-Net**, a novel deep learning framework for species-aware enzyme classification from protein sequence embeddings.
 
----
+The framework utilizes pretrained protein language model embeddings and introduces a hybrid **Transformer-MLP architecture** with feature-level attention mechanisms for improved biological function prediction.
 
-## 🚀 Key Contributions
+The proposed model is designed for **8-class enzyme classification**:
 
-### 🧠 Machine Learning Innovation
-- Transformer–MLP hybrid architecture (Enzyme-Net)
-- Multi-Scale Feature Extraction (MSFE)
-- Dynamic Feature Gating (DFG)
-- Feature-Level Multi-Head Attention
-- Residual Feature Processing
-- Ensemble-based classification head
+- Class 0: Non-enzyme proteins
+- Classes 1–7: EC enzyme classes
 
----
+The complete pipeline includes:
 
-### 🧬 Biological Rigor
-- UniProt fish protein dataset
-- 8-class EC enzyme classification (0–7)
-- Species-aware train/test split (NO leakage)
-- 19 unseen test species evaluation
+1. Fish UniProt dataset processing
+2. Protein class annotation
+3. Species-aware dataset splitting
+4. Deep learning model training
+5. Baseline comparison
+6. Ablation studies
+7. Statistical validation
+8. Publication-quality result generation
 
----
-
-### 📊 Experimental Design
-- 10-fold stratified cross-validation
-- Hyperparameter grid search
-- 8 ablation variants
-- Statistical significance testing:
-  - Friedman Test
-  - Wilcoxon Signed-Rank Test
-  - Mann–Whitney U Test
 
 ---
 
-### 📈 Publication-Ready Outputs
-- 7 high-quality figures (PNG + TIFF)
-- LaTeX-ready tables
-- Model ranking analysis
-- ROC analysis (8-class OVR)
+# Model Overview
+
+## Enzyme-Net Architecture
+
+Enzyme-Net integrates several novel components:
+
+### 1. Multi-Scale Feature Extraction (MSFE)
+
+Extracts complementary patterns from high-dimensional protein embeddings using parallel feature processing pathways.
+
+### 2. Dynamic Feature Gating (DFG)
+
+Learns adaptive feature importance and selects biologically informative embedding dimensions.
+
+### 3. Feature-Level Multi-Head Attention
+
+Treats embedding features as tokens and learns interactions between protein representation dimensions.
+
+### 4. Residual Feature Processor
+
+Uses skip connections to improve feature transformation and gradient flow.
+
+### 5. Learnable Ensemble Heads
+
+Combines multiple prediction heads using adaptive weighting.
 
 ---
 
-## 🧬 Dataset
+# Dataset
 
-- Source: UniProt (reviewed fish proteins)
-- Embeddings: 1024-d protein embeddings (HDF5)
-- Classes:
-  - 0 → Non-enzyme
-  - 1–7 → EC enzyme classes
+The framework uses fish protein sequences obtained from UniProt.
+
+Dataset characteristics:
+
+- Taxonomic group: Actinopterygii (fish)
+- Protein source: UniProt reviewed proteins
+- Representation: 1024-dimensional protein embeddings
+- Task: 8-class enzyme classification
+
+The dataset preparation scripts analyze protein distributions, EC classes, and species composition.
 
 ---
 
-## 🏗️ Repository Structure
-
-```
+# Repository Structure
 Enzyme-Net/
 │
 ├── 01_fish_uniprot_analysis.py
-│   → EC classification + dataset exploration
 │
-├── 02_species_distribution_analysis.py
-│   → Fish species profiling + biological validation
+├── 02_species_distribution_Analysis.py
 │
-├── 03_species_aware_split.py
-│   → Train/test split (20% unseen species)
+├── 03_Species_aware_Split.py
 │
-├── 04_enzyme_net_model.py
-│   → Enzyme-Net architecture + baselines
+├── 04_Enzyme_net_model.py
 │
-├── 05_results_aggregation.py
-│   → Combine CV + grid search results
+├── 05_results_aggrgation.py
 │
-├── 06_statistical_analysis.py
-│   → Friedman + Wilcoxon + Mann–Whitney tests
+├── 06_Statistical_Analysis.py
 │
-├── 07_results_visualization_viewer.py
-│   → Full results dashboard + tables
+├── 07_article_tables.py
 │
-├── 08_generate_enzyme_net_figures.py
-│   → Publication-ready figures generator
+├── 08_article_figures.py
 │
-├── data/
-│   ├── UniProt TSV files
-│   ├── EC classification CSV
-│   └── 1024-d protein embeddings (HDF5)
+├── README.md
 │
-├── results/
-│   ├── CV results
-│   ├── ablation studies
-│   ├── grid search outputs
-│   └── final summaries
-│
-└── figures/
-    ├── PNG/
-    └── TIFF/
-```
+└── Results/
 
 ---
 
-## ⚙️ Installation
+# Pipeline Workflow
+
+UniProt Fish Protein Dataset
+              |
+              |
+              v
+Protein Sequence Processing
+              |
+              |
+              v
+1024-D Protein Embeddings
+              |
+              |
+              v
+Species-Aware Train/Test Split
+              |
+              |
+              v
+Baseline Models
+(Logistic Regression,
+ Vanilla MLP,
+ DNN)
+              |
+              |
+              v
+Enzyme-Net
+(MSFE + DFG + Attention + Residual + Ensemble)
+              |
+              |
+              v
+Performance Evaluation
+              |
+              |
+              v
+Statistical Analysis
+              |
+              |
+              v
+Publication Figures and Tables
+
+---
+
+# Installation
+
+Clone repository:
 
 ```bash
 git clone https://github.com/yourusername/Enzyme-Net.git
+
 cd Enzyme-Net
+conda create -n enzymenet python=3.9
 
+conda activate enzymenet
 pip install -r requirements.txt
-```
-
----
-
-## 📦 Requirements
-
-```
+Required Libraries
+Main dependencies:
 numpy
 pandas
 scikit-learn
-torch
+scipy
 matplotlib
 seaborn
-scipy
+torch
 h5py
-tabulate
-```
+Usage
+Step 1: Analyze UniProt Dataset
+Run:
+python 01_fish_uniprot_analysis.py
+This performs:
+- Protein loading
+- EC class extraction
+- 8-class classification analysis
+- Species statistics
+Step 2: Species Distribution Analysis
+python 02_species_distribution_Analysis.py
 
----
+Generates:
+- Species composition
+- Protein distribution
+- Fish group statistics
+Step 3: Species-Aware Data Split
+python 03_Species_aware_Split.py
 
-## 🔄 Workflow Pipeline
+Creates:
+- Training dataset
+- Independent species-aware test dataset
+- Scaled 1024-dimensional embeddings
+Step 4: Train Enzyme-Net
+python 04_Enzyme_net_model.py
 
-### 1️⃣ Data Analysis
-- UniProt dataset loading
-- EC class mapping
-- Species distribution analysis
+The model evaluates:
+Baselines
+- Logistic Regression
+- Vanilla MLP
+- DNN Baseline
+Proposed Model
+- Enzyme-Net
+Ablation Variants
+- Without MSFE
+- Without DFG
+- Without Attention
+- Without Ensemble
+- Without Residuals
+- Higher Dropout
+- Lower Dropout
+Step 5: Aggregate Results
+python 05_results_aggrgation.py
 
-### 2️⃣ Data Preparation
-- Species-aware train/test split
-- Embedding extraction (1024-d)
-- Feature scaling
+Produces:
+- Combined CV results
+- Best configurations
+- Model comparison tables
+Step 6: Statistical Analysis
+python 06_Statistical_Analysis.py
 
-### 3️⃣ Model Training
-- EnzymeNet training
-- Baseline models:
-  - Logistic Regression
-  - Vanilla MLP
-  - DNN Baseline
+Evaluates:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- MCC
+- AUC
+Using fold-level statistical comparisons.
+Step 7: Generate Article Tables
+python 07_article_tables.py
 
-### 4️⃣ Evaluation
-- 10-fold cross-validation
-- Grid search optimization
-- Performance metrics:
-  - Accuracy
-  - Precision
-  - Recall
-  - F1-score
-  - MCC
-  - AUC
+Creates manuscript-ready tables.
+Step 8: Generate Figures
+python 08_article_figures.py
 
-### 5️⃣ Statistical Analysis
-- Friedman test (multi-model comparison)
-- Wilcoxon test (pairwise comparison)
-- Mann–Whitney U test (distributional comparison)
-
-### 6️⃣ Visualization
+Generates:
+- Model performance comparison
 - Training curves
-- ROC curves (8-class)
-- Ablation study plots
-- Model ranking charts
+- Hyperparameter heatmaps
+- Ranking plots
+- ROC curves
+- Ablation figures
+Experimental Design
+Validation Strategy
+- Species-aware split
+- 10-fold cross-validation
+- Independent species testing
+Evaluation Metrics
+The framework reports:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Matthews Correlation Coefficient (MCC)
+- ROC-AUC
+Reproducibility
+All experiments use:
+- Fixed random seed
+- Deterministic training settings
+- Saved model configurations
+- Complete fold-level histories
+Citation
+If you use this repository, please cite:
+@article{enzymenet2026,
+title={Enzyme-Net: A Species-Aware Feature-Level Attention Transformer-MLP Framework for Enzyme Classification from Protein Embeddings},
+author={Your Name},
+journal={},
+year={2026}
+}
 
-### 7️⃣ Figure Generation
-- Publication-ready figures (300 DPI)
-- PNG + TIFF formats
-- Journal submission compliant outputs
-
----
-
-## 📊 Key Results
-
-| Model | Test MCC |
-|------|----------|
-| Logistic Regression | ~0.85 |
-| Vanilla MLP | ~0.91 |
-| DNN Baseline | ~0.90 |
-| **EnzymeNet (Ours)** | **~0.93** |
-| Best Ablation (w/o Ensemble) | **~0.93+** |
-
----
-
-## 🧪 Ablation Study
-
-The following components were evaluated:
-
-- Without Multi-Scale Feature Extraction (MSFE)
-- Without Dynamic Feature Gating (DFG)
-- Without Attention Module
-- Without Ensemble Head
-- Without Residual Connections
-
-👉 Result: Each component contributes significantly to final performance.
-
----
-
-## 📈 Statistical Validation
-
-Significance confirmed using:
-
-- ✔ Friedman Test (global comparison)
-- ✔ Wilcoxon Signed-Rank Test (pairwise)
-- ✔ Mann–Whitney U Test (distribution comparison)
-
-👉 EnzymeNet shows statistically significant improvement over baselines.
-
----
-
-## 📊 Figures Generated
-
-1. Model Performance Comparison  
-2. Training Curves (Accuracy + Loss)  
-3. 10-Fold Cross-Validation Results  
-4. Hyperparameter Grid Search Heatmap  
-5. Model Ranking with Error Bars  
-6. ROC Curves (8-class classification)  
-7. Ablation Study Results  
-
----
-
-## 🧬 Biological Significance
-
-- First species-aware enzyme classification system using fish proteomes
-- Prevents dataset leakage via strict species separation
-- Demonstrates generalization to unseen species
-- Supports computational enzymology and functional annotation
-
----
-
-## 🏆 Highlights
-
-✔ Novel Transformer–MLP hybrid architecture  
-✔ Species-level generalization evaluation  
-✔ Strong statistical validation framework  
-✔ Publication-ready figures and tables  
-✔ Full reproducibility pipeline  
-
----
-
-## 📌 Citation
-
-If you use this work, please cite:
-
-```
-Enzyme-Net: A Novel Transformer–MLP Hybrid Framework for Fish Enzyme Classification
-
-```
-
----
-
-## 📬 Contact
-
-For questions or collaboration:
-- Author:Anjum Shahzad
-- Email: anjumstat@yahoo.com
-```
-
+Contact
+For questions regarding this project:
+Author: H.A.R
+License
+This project is released under the MIT License.
